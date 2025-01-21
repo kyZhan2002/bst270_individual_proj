@@ -180,15 +180,15 @@ Attaching package: 'dplyr'</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tb1<span class="sc">*</span><span class="dv">100</span>,<span class="at">format =</span> <span class="st">"pipe"</span>,<span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tb1<span class="sc">*</span><span class="dv">100</span>,<span class="at">format =</span> <span class="st">"html"</span>,<span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">Riskier lottery</th>
-<th style="text-align: right;">Safer lottery</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Riskier lottery</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Safer lottery</th>
 </tr>
 </thead>
 <tbody>
@@ -219,13 +219,15 @@ Attaching package: 'dplyr'</code></pre>
 </tr>
 </tbody>
 </table>
+
+
 </div>
 </div>
 <p><strong>Comment:</strong> We nearly recovered the table in the article, with slight difference.</p>
 </section>
-<section id="reproducing-plot" class="level2">
-<h2 class="anchored" data-anchor-id="reproducing-plot">Reproducing Plot</h2>
-<p>The figure shows the percentage of the steak preparation preference of all steak eating interviewees. First we filter out all people who eats steak.</p>
+<section id="reproduce-the-figure" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce-the-figure">Reproduce the figure</h2>
+<p>The figure shows the percentage of the steak preparation preference of all steak-eating interviewees. First we filter out all people who eat steak.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -294,7 +296,7 @@ Attaching package: 'dplyr'</code></pre>
 </section>
 <section id="reflection-on-the-reproducibility" class="level2">
 <h2 class="anchored" data-anchor-id="reflection-on-the-reproducibility">Reflection on the reproducibility</h2>
-<p>This is a quite simple data analysis. The data is publicly available, and the figure and the table are quite reproducible. I think the only problem arises in the first two rows I removed. As these two rows are indeed invalid ones, I guess the author made some mistake when storing the data as the csv file.</p>
+<p>The data is publicly available, and the figure and the table are quite reproducible. I think the only problem arises in the first two rows I removed. As these two rows are indeed invalid ones, I guess the author made some mistakes when storing the data as the csv file.</p>
 </section>
 
 </main>

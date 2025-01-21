@@ -14,7 +14,7 @@ Images of the original plot and table that are going to be reproduced are also p
 
 1.  Clone the GitHub repository.
 2.  Open the `steak_analysis.qmd` file in R Studio (pre-requisite: install `knitr`, `dplyr` and `ggplot2` R packages).
-3.  Click "Preview" or "Run" to execute the notebook.
+3.  Click "Run" to execute the notebook; click "Render" to see the final output html file.
 
 ## Data
 

@@ -308,7 +308,7 @@ steak. Next we reproduce the table:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{kable}\NormalTok{(tb1}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{format =} \StringTok{"pipe"}\NormalTok{,}\AttributeTok{digits =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(tb1}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{format =} \StringTok{"html"}\NormalTok{,}\AttributeTok{digits =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -329,10 +329,10 @@ Rare & 4.9 & 5.9 \\
 \textbf{Comment:} We nearly recovered the table in the article, with
 slight difference.
 
-\subsection{Reproducing Plot}\label{reproducing-plot}
+\subsection{Reproduce the figure}\label{reproduce-the-figure}
 
 The figure shows the percentage of the steak preparation preference of
-all steak eating interviewees. First we filter out all people who eats
+all steak-eating interviewees. First we filter out all people who eat
 steak.
 
 \begin{Shaded}
@@ -403,11 +403,10 @@ Saving 5.5 x 3.5 in image
 \subsection{Reflection on the
 reproducibility}\label{reflection-on-the-reproducibility}
 
-This is a quite simple data analysis. The data is publicly available,
-and the figure and the table are quite reproducible. I think the only
-problem arises in the first two rows I removed. As these two rows are
-indeed invalid ones, I guess the author made some mistakes when storing
-the data as the csv file.
+The data is publicly available, and the figure and the table are quite
+reproducible. I think the only problem arises in the first two rows I
+removed. As these two rows are indeed invalid ones, I guess the author
+made some mistakes when storing the data as the csv file.
 
 
 

@@ -98,7 +98,7 @@ steak. Next we reproduce the table:
 <summary>Code</summary>
 
 ``` r
-kable(tb1*100,format = "pipe",digits = 1)
+kable(tb1*100,format = "html",digits = 1)
 ```
 
 </details>
@@ -117,7 +117,7 @@ difference.
 ## Reproduce the figure
 
 The figure shows the percentage of the steak preparation preference of
-all steak eating interviewees. First we filter out all people who eat
+all steak-eating interviewees. First we filter out all people who eat
 steak.
 
 <details class="code-fold">
@@ -192,8 +192,7 @@ ggsave("../fig/steak_preference.png",plot = gg)
 
 ## Reflection on the reproducibility
 
-This is a quite simple data analysis. The data is publicly available,
-and the figure and the table are quite reproducible. I think the only
-problem arises in the first two rows I removed. As these two rows are
-indeed invalid ones, I guess the author made some mistakes when storing
-the data as the csv file.
+The data is publicly available, and the figure and the table are quite
+reproducible. I think the only problem arises in the first two rows I
+removed. As these two rows are indeed invalid ones, I guess the author
+made some mistakes when storing the data as the csv file.
