@@ -138,69 +138,17 @@ Attaching package: 'dplyr'</code></pre>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove first two invalid rows</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>steak_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/steak-risk-survey.csv"</span>,<span class="at">header =</span> T)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>steak_data <span class="ot">=</span> steak_data[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(steak_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>steak_data <span class="ot">=</span> steak_data[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>  RespondentID
-3   3234982343
-4   3234973379
-5   3234972383
-6   3234958833
-7   3234955240
-8   3234955097
-  Consider.the.following.hypothetical.situations...br.In.Lottery.A..you.have.a.50..chance.of.success..with.a.payout.of..100...br.In.Lottery.B..you.have.a.90..chance.of.success..with.a.payout.of..20...br..br.Assuming.you.have..10.to.bet..would.you.play. ...
-3                                                                                                                                                                                                                                                      Lottery A
-4                                                                                                                                                                                                                                                      Lottery A
-5                                                                                                                                                                                                                                                      Lottery B
-6                                                                                                                                                                                                                                                      Lottery B
-7                                                                                                                                                                                                                                                      Lottery A
-8                                                                                                                                                                                                                                                      Lottery A
-  Do.you.ever.smoke.cigarettes. Do.you.ever.drink.alcohol. Do.you.ever.gamble.
-3                            No                        Yes                  No
-4                            No                        Yes                 Yes
-5                           Yes                        Yes                 Yes
-6                            No                        Yes                  No
-7                            No                         No                  No
-8                            No                        Yes                  No
-  Have.you.ever.been.skydiving. Do.you.ever.drive.above.the.speed.limit.
-3                            No                                       No
-4                            No                                      Yes
-5                            No                                      Yes
-6                            No                                      Yes
-7                            No                                      Yes
-8                            No                                      Yes
-  Have.you.ever.cheated.on.your.significant.other. Do.you.eat.steak.
-3                                               No               Yes
-4                                              Yes               Yes
-5                                              Yes               Yes
-6                                              Yes               Yes
-7                                               No               Yes
-8                                              Yes                No
-  How.do.you.like.your.steak.prepared. Gender   Age  Household.Income
-3                          Medium rare   Male  &gt; 60 $50,000 - $99,999
-4                                 Rare   Male  &gt; 60         $150,000+
-5                               Medium   Male  &gt; 60 $50,000 - $99,999
-6                               Medium   Male  &gt; 60 $50,000 - $99,999
-7                          Medium rare   Male 18-29      $0 - $24,999
-8                                        Male  &gt; 60         $150,000+
-                         Education Location..Census.Region.
-3 Some college or Associate degree       East North Central
-4                  Graduate degree           South Atlantic
-5                  Bachelor degree              New England
-6                  Graduate degree          Middle Atlantic
-7 Some college or Associate degree       West South Central
-8                  Graduate degree              New England</code></pre>
-</div>
 </div>
 <p>The original dataset has too long names and some irrelevant variables, so we extract a new dataset that is useful for our analysis.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter and rename the dataset</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>steak_lottery_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">lottery =</span> steak_data<span class="sc">$</span>Consider.the.following.hypothetical.situations...br.In.Lottery.A..you.have.a.<span class="dv">50</span>..chance.of.success..with.a.payout.of..<span class="dv">100</span>...br.In.Lottery.B..you.have.a.<span class="dv">90</span>..chance.of.success..with.a.payout.of..<span class="dv">20</span>...br..br.Assuming.you.have..<span class="fl">10.</span>to.bet..would.you.play.Lottery.A.or.Lottery.B., <span class="at">eat_steak =</span> steak_data<span class="sc">$</span>Do.you.eat.steak.,<span class="at">cook_steak =</span> steak_data<span class="sc">$</span>How.do.you.like.your.steak.prepared.)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(steak_lottery_data, <span class="at">file =</span> <span class="st">"../data/steak_lottery_data.csv"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(steak_lottery_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter and rename the dataset</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>steak_lottery_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">lottery =</span> steak_data<span class="sc">$</span>Consider.the.following.hypothetical.situations...br.In.Lottery.A..you.have.a.<span class="dv">50</span>..chance.of.success..with.a.payout.of..<span class="dv">100</span>...br.In.Lottery.B..you.have.a.<span class="dv">90</span>..chance.of.success..with.a.payout.of..<span class="dv">20</span>...br..br.Assuming.you.have..<span class="fl">10.</span>to.bet..would.you.play.Lottery.A.or.Lottery.B., <span class="at">eat_steak =</span> steak_data<span class="sc">$</span>Do.you.eat.steak.,<span class="at">cook_steak =</span> steak_data<span class="sc">$</span>How.do.you.like.your.steak.prepared.)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(steak_lottery_data, <span class="at">file =</span> <span class="st">"../data/steak_lottery_data.csv"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(steak_lottery_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    lottery eat_steak  cook_steak
@@ -220,9 +168,9 @@ Attaching package: 'dplyr'</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> steak_lottery_data <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lottery <span class="sc">!=</span> <span class="st">""</span>, eat_steak <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> steak_lottery_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lottery <span class="sc">!=</span> <span class="st">""</span>, eat_steak <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 426   3</code></pre>
@@ -232,7 +180,7 @@ Attaching package: 'dplyr'</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tb1<span class="sc">*</span><span class="dv">100</span>,<span class="at">format =</span> <span class="st">"pipe"</span>,<span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tb1<span class="sc">*</span><span class="dv">100</span>,<span class="at">format =</span> <span class="st">"pipe"</span>,<span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -281,14 +229,14 @@ Attaching package: 'dplyr'</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the counting table</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> steak_lottery_data <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(eat_steak <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>prep_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Rare"</span>,<span class="st">"Medium rare"</span>,<span class="st">"Medium"</span>,<span class="st">"Medium Well"</span>,<span class="st">"Well"</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>df2<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">table</span>(df2<span class="sc">$</span>cook_steak)[prep_names]<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">table</span>(df2<span class="sc">$</span>cook_steak))<span class="sc">*</span><span class="dv">100</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df2<span class="fl">.1</span>) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Cooked"</span>,<span class="st">"Percentage"</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>df2<span class="fl">.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the counting table</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> steak_lottery_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(eat_steak <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>prep_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Rare"</span>,<span class="st">"Medium rare"</span>,<span class="st">"Medium"</span>,<span class="st">"Medium Well"</span>,<span class="st">"Well"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>df2<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">table</span>(df2<span class="sc">$</span>cook_steak)[prep_names]<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">table</span>(df2<span class="sc">$</span>cook_steak))<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df2<span class="fl">.1</span>) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Cooked"</span>,<span class="st">"Percentage"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>df2<span class="fl">.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Cooked Percentage
@@ -303,27 +251,27 @@ Attaching package: 'dplyr'</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduce the figure</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">=</span> <span class="fu">ggplot</span>(df2<span class="fl">.1</span>, <span class="fu">aes</span>(<span class="at">x =</span> Cooked, <span class="at">y =</span> Percentage)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"#4B2C20"</span>, <span class="st">"#754637"</span>, <span class="st">"#AA6546"</span>, <span class="st">"#C06050"</span>, <span class="st">"#C93535"</span>))) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(Percentage), <span class="st">"%"</span>)), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"'How Do You Like Your Steak Prepared?'"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"From a survey of"</span>, <span class="fu">sum</span>(<span class="fu">nrow</span>(df2)), <span class="st">"steak-eating responses"</span>),</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>)),</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="fl">0.25</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>gg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduce the figure</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">=</span> <span class="fu">ggplot</span>(df2<span class="fl">.1</span>, <span class="fu">aes</span>(<span class="at">x =</span> Cooked, <span class="at">y =</span> Percentage)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"#4B2C20"</span>, <span class="st">"#754637"</span>, <span class="st">"#AA6546"</span>, <span class="st">"#C06050"</span>, <span class="st">"#C93535"</span>))) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(Percentage), <span class="st">"%"</span>)), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"'How Do You Like Your Steak Prepared?'"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"From a survey of"</span>, <span class="fu">sum</span>(<span class="fu">nrow</span>(df2)), <span class="st">"steak-eating responses"</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>)),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="fl">0.25</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>gg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -333,8 +281,12 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 </div>
-<p>From the plot we see that we nearly reproduced the figure, only with slight difference in the percentage.</p>
+<p><strong>Comment:</strong> From the plot we see that we nearly reproduced the figure, only with slight difference in the percentage.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"../fig/steak_preference.png"</span>,<span class="at">plot =</span> gg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Saving 7 x 5 in image</code></pre>
 </div>
