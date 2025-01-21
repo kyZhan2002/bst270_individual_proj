@@ -82,9 +82,9 @@ kable(tb1*100,format = "pipe",digits = 1)
 
 **Comment:** We nearly recovered the table in the article, with slight difference.
 
-## Reproducing Plot
+## Reproduce the figure
 
-The figure shows the percentage of the steak preparation preference of all steak eating interviewees. First we filter out all people who eats steak.
+The figure shows the percentage of the steak preparation preference of all steak eating interviewees. First we filter out all people who eat steak.
 
 ```{r}
 # Create the counting table
