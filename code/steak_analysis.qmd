@@ -1,26 +1,136 @@
 ---
-title: "steak_analysis"
-format: html
-editor: visual
+title: "BST 270: Individual Project"
+subtitle: "Reproducible Data Science: How Americans Like Their Steak (FiveThirtyEight)"
+author: "Keyao Zhan"
+format:
+  html: default
+  pdf:
+    keep-tex: true
+    include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+         \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+  gfm: default
+code-fold: true
 ---
 
-## Quarto
+## Introduction
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+The following notebook aims to satisfy the requirements for the individual project component of BST 270: Reproducible Data Science, taken Winter 2025.
 
-## Running Code
+#### Motivations and Reproducibility
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+I aim to reproduce the figure and the table from FiveThirtyEight's [How Americans Like Their Steak](https://fivethirtyeight.com/features/how-americans-like-their-steak/). I will utilize the provided dataset based on a survey testing 550 people about their risk evaluation and steak preference, located at `../data/steak-risk-survey.csv`.
 
-```{r}
-1 + 1
+## Setup
+
+First, we load our required packages and required dataset. We utilize the `dplyr`, `knitr` and `ggplot2` library to produce nice figures and tables and process data efficiently.
+
+```{r,echo=F,results='hide'}
+library(ggplot2)
+library(dplyr)
+library(knitr)
 ```
 
-You can add options to executable code like this
+Here we remove the first two rows which are of no information.
 
-```{r}
-#| echo: false
-2 * 2
+```{r remove}
+# Remove first two invalid rows
+steak_data <- read.csv("../data/steak-risk-survey.csv",header = T)
+steak_data = steak_data[-c(1,2),]
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+The original dataset has too long names and some irrelevant variables, so we extract a new dataset that is useful for our analysis.
+
+```{r}
+# Filter and rename the dataset
+steak_lottery_data = data.frame(lottery = steak_data$Consider.the.following.hypothetical.situations...br.In.Lottery.A..you.have.a.50..chance.of.success..with.a.payout.of..100...br.In.Lottery.B..you.have.a.90..chance.of.success..with.a.payout.of..20...br..br.Assuming.you.have..10.to.bet..would.you.play.Lottery.A.or.Lottery.B., eat_steak = steak_data$Do.you.eat.steak.,cook_steak = steak_data$How.do.you.like.your.steak.prepared.)
+write.csv(steak_lottery_data, file = "../data/steak_lottery_data.csv")
+head(steak_lottery_data)
+```
+
+## Reproduce the table
+
+The table in the article shows the pertange of steak preparation preference of the people who choose a riskier lottery or a safer lottery.
+
+First we need to remove all the NA (or empty values) in lottery variable, and focus on people who eats steak:
+
+```{r}
+df1 = steak_lottery_data %>%
+  filter(lottery != "", eat_steak == "Yes")
+dim(df1)
+```
+
+There are 426 people who answered the lottery question and also eat steak. Next we reproduce the table:
+
+```{r,echo=F}
+# Create the counting table
+tb1 = table(df1$cook_steak,df1$lottery)
+# Rearrange the rows
+tb1 = tb1[c(5,3,1,2,4),]
+
+for(i in 1:ncol(tb1)){
+  tb1[,i] = tb1[,i]/sum(tb1[,i])
+}
+colnames(tb1) = c("Riskier lottery","Safer lottery")
+```
+
+```{r}
+kable(tb1*100,format = "pipe",digits = 1)
+```
+
+**Comment:** We nearly recovered the table in the article, with slight difference.
+
+## Reproducing Plot
+
+The figure shows the percentage of the steak preparation preference of all steak eating interviewees. First we filter out all people who eats steak.
+
+```{r}
+# Create the counting table
+df2 = steak_lottery_data %>%
+  filter(eat_steak == "Yes")
+
+prep_names = c("Rare","Medium rare","Medium","Medium Well","Well")
+df2.1 = data.frame(table(df2$cook_steak)[prep_names]/sum(table(df2$cook_steak))*100)
+colnames(df2.1) = c("Cooked","Percentage")
+df2.1
+```
+
+Next we reproduce the plot in the article:
+
+```{r}
+# Reproduce the figure
+gg = ggplot(df2.1, aes(x = Cooked, y = Percentage)) +
+  geom_bar(stat = "identity", fill = rev(c("#4B2C20", "#754637", "#AA6546", "#C06050", "#C93535"))) +
+  coord_flip() +  
+  geom_text(aes(label = paste0(round(Percentage), "%")), hjust = -0.2) + 
+  labs(
+    title = "'How Do You Like Your Steak Prepared?'",
+    subtitle = paste("From a survey of", sum(nrow(df2)), "steak-eating responses"),
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, margin = margin(b = 10)),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(size = 12),
+    axis.ticks = element_blank(),
+    aspect.ratio = 0.25
+  )
+gg
+```
+
+**Comment:** From the plot we see that we nearly reproduced the figure, only with slight difference in the percentage.
+
+```{r}
+ggsave("../fig/steak_preference.png",plot = gg)
+```
+
+
+## Reflection on the reproducibility
+
+This is a quite simple data analysis. The data is publicly available, and the figure and the table are quite reproducible. I think the only problem arises in the first two rows I removed. As these two rows are indeed invalid ones, I guess the author made some mistake when storing the data as the csv file.
+
